@@ -17,7 +17,7 @@ BENEFITS:
 - Automation: The athlete will be able to verify the services that paid for and wants, with QR code.
 - Certificate: The athlete will be able to receive a token or an NFT for the participation and the position. 
 
-REGISTERING: As soon as the athletes have entered all the necessary information (perosnal info, pay for the participation and select the services they want), 
+REGISTERING: As soon as the athletes have entered all the necessary information (personal info, pay for the participation and select the services they want), 
 they will receive their QR code and enter it in the Blockchain.
 
 CONFIRMING: In the race day, through athlete's QR code, the organizer will be able to see if all the needs have been covered or if something is still pending.
