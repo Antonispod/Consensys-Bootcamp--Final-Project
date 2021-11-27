@@ -21,3 +21,5 @@ REGISTERING: As soon as the athletes have entered all the necessary information 
 they will receive their QR code and enter it in the Blockchain.
 
 CONFIRMING: In the race day, through athlete's QR code, the organizer will be able to see if all the needs have been covered or if something is still pending.
+
+DRAFT OF THE PROJECT: https://miro.com/app/board/o9J_ljBOX4s=/
