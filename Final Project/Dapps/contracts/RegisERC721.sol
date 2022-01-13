@@ -57,10 +57,10 @@ contract RunToken is ERC721, Pausable, Ownable {
 
     // Modifiers
     // Owner
-    modifier isOwner (address _owner) {
-        require(msg.sender == _owner);
-        _;
-    }
+    // modifier isOwner (address _owner) {
+    //     require(msg.sender == _owner);
+    //     _;
+    // }
  //----------------------------------ERC721-----------------------------------   
     using Counters for Counters.Counter;
 
@@ -71,7 +71,7 @@ contract RunToken is ERC721, Pausable, Ownable {
     constructor() ERC721("Run Token", "RUN") {}
 
         //Create a function for the events to decided the price for the races !!!!!!!!!!!!!!!
-    function initializeRace (string memory _racename, string memory _country) onlyOwner() public returns(uint) {
+    function initializeRace (string memory _racename, string memory _country) onlyOwner() public whenNotPaused() returns(uint) {
         totalRaces[raceCount] =  RaceRegistration({
         racename:_racename,
         country:_country,
@@ -83,7 +83,7 @@ contract RunToken is ERC721, Pausable, Ownable {
     }
 
     // If the event is inactive
-    function raceStatus(uint raceNumber) public view returns (bool)
+    function raceStatus(uint raceNumber) public view whenNotPaused() returns (bool)
     {
         bool activ = totalRaces[raceNumber].active; 
         return(activ);
@@ -101,6 +101,12 @@ contract RunToken is ERC721, Pausable, Ownable {
         athlCount: athlCount+1
         });
 
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _safeMint(msg.sender, tokenId);
+
+        // To add refgistered races mapping/ array
+
         athlCount = athlCount +1;
         emit NewAthlete (athlCount);
     }
@@ -108,7 +114,7 @@ contract RunToken is ERC721, Pausable, Ownable {
  //----------------------------------ERC721-Functions-----------------------------------   
 
     function _baseURI() internal pure override returns (string memory) {
-        return "IPFS//folder";
+        return "https://ipfs.io/ipfs/QmU3GcoWH4zShrX4m1oUJTF5gwvmpHFnFwekmbjVaeQ";
     }
 
     function pause() public onlyOwner {
