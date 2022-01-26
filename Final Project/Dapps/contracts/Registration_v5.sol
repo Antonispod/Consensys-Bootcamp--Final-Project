@@ -1,12 +1,15 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^ 0.8.0;
+pragma solidity >=0.4.21 <0.7.0;
 
-// ---------------------------------- Verification contract ------------------------------
+import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/access/Ownable.sol";
+import "@openzeppelin/contracts/utils/Counters.sol";
 
-contract Registration {
+contract RunToken is ERC721, Pausable, Ownable {
 
-    //Owner 
-    address public owner;
+    //     //Owner 
+    // address public owner;
 
     //Athletes that will run
     uint public athlCount=0;
@@ -58,16 +61,17 @@ contract Registration {
         require(msg.sender == _owner);
         _;
     }
+ //----------------------------------ERC721-----------------------------------   
+    using Counters for Counters.Counter;
 
+    Counters.Counter private _tokenIdCounter;
 
-// -------------------------------FUNCTIONS-------------------------------------
+ //----------------------------------Functions-----------------------------------   
 
-    constructor() {
-        owner = msg.sender;
-    } 
+    // constructor() ERC721("Run Token", "RUN") {}
 
-    //Create a function for the events to decided the price for the races !!!!!!!!!!!!!!!
-    function initializeRace (string memory _racename, string memory _country) isOwner(owner) public returns(uint) {
+        //Create a function for the events to decided the price for the races !!!!!!!!!!!!!!!
+    function initializeRace (string memory _racename, string memory _country) onlyOwner() public returns(uint) {
         totalRaces[raceCount] =  RaceRegistration({
         racename:_racename,
         country:_country,
@@ -86,7 +90,7 @@ contract Registration {
     }
 
     // -------------ATHLETES----------------------
-    function addAthlete(string memory _name, uint _age, string memory _gender, uint _payment, uint _raceCount) public payable {
+    function addAthlete(string memory _name, uint _age, string memory _gender) public payable {
 
         require (msg.value >= 8,"Not enought money");
          
@@ -99,5 +103,33 @@ contract Registration {
 
         athlCount = athlCount +1;
         emit NewAthlete (athlCount);
+    }
+
+ //----------------------------------ERC721-Functions-----------------------------------   
+
+    function _baseURI() internal pure override returns (string memory) {
+        return "IPFS//folder";
+    }
+
+    function pause() public onlyOwner {
+        _pause();
+    }
+
+    function unpause() public onlyOwner {
+        _unpause();
+    }
+
+    function safeMint(address to) public onlyOwner {
+        uint256 tokenId = _tokenIdCounter.current();
+        _tokenIdCounter.increment();
+        _safeMint(to, tokenId);
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
+        internal
+        whenNotPaused
+        override
+    {
+        super._beforeTokenTransfer(from, to, tokenId);
     }
 }
