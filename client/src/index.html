@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<title>W3.CSS</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+
+<body>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/web3/1.7.0/web3.min.js"> </script>
+
+  <!-- <div class="w3-container">
+  <h2>Closable Tabs</h2>
+  <p>To close a tab, add onclick="this.parentElement.style.display='none'" to an element inside the tab container.</p>
+  <p><strong>Tip:</strong> The w3-button class can be used to style the close button (x):</p>
+</div> -->
+
+  <div class="w3-bar w3-black">
+
+    <!-- Buttoms -->
+    <button class="w3-bar-item w3-button" data-type="navigation-link" data-page="Home" >Home</button>
+    <button class="w3-bar-item w3-button" data-type="navigation-link" data-page="Athlete">Athlete</button>
+    <button class="w3-bar-item w3-button" data-type="navigation-link" data-page="Running event">Running event</button>
+    <button class="w3-bar-item w3-button" id="wallet-connect" style="display:none">Connect to wallet</button>
+    <button class="w3-bar-item w3-button" id="wallet-account" style="display:none"></button>
+  </div>
+
+  <!-- Home page -->
+  <div id="Home" class="w3-container w3-display-container city">
+    <span onclick="this.parentElement.style.display='none'"
+      class="w3-button w3-large w3-display-topright">&times;</span>
+    <h2>Home</h2>
+    <p>Welcome to Athletes dapp</p>
+    <img
+      src="https://images.theconversation.com/files/303322/original/file-20191124-74557-16zkcnl.jpg?ixlib=rb-1.1.0&q=45&auto=format&w=1200&h=1200.0&fit=crop"
+      alt="Girl in a jacket" style="width:500px;height:600px;">
+  </div>
+
+
+  <!-- Athlete page -->
+  <div id="Athlete" class="w3-container w3-display-container city" style="display:none">
+    <span onclick="this.parentElement.style.display='none'"
+      class="w3-button w3-large w3-display-topright">&times;</span>
+    <h2>Athlete</h2>
+    <p>Welcome athlete</p>
+    <form id="athlete-form">
+      <label for="name">Name:</label><br>
+      <input required type="text" id="name" name="_name"><br>
+      <label for="age">Age:</label><br>
+      <input required type="text" id="age" name="_age"><br>
+      <div>Gender:</div>
+      <label for="male">Male</label>
+      <input required type="radio" id="male" name="_gender" value="male"><br>
+      <label for="female">Female</label>
+      <input required type="radio" id="female" name="_gender" value="female"><br>
+      <input type="submit" value="Submit">
+    </form>
+
+  </div>
+
+
+  <!-- Event page -->
+  <div id="Running event" class="w3-container w3-display-container city" style="display:none">
+    <span onclick="this.parentElement.style.display='none'"
+      class="w3-button w3-large w3-display-topright">&times;</span>
+    <h2>Running event</h2>
+    <p>You are a running event.</p>
+    <form id="event-form">
+      <label for="event-name">Name of event:</label><br>
+      <input required type="text" id="event-name" name="_racename"><br>
+      <label for="event-country">Country:</label><br>
+      <input required type="text" id="event-country" name="_country"><br>
+      <input type="submit" value="Submit">
+  </div>
+
+</body>
+
+</html>
